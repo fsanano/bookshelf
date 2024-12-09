@@ -29,7 +29,6 @@ func AuthMiddleware(c *fiber.Ctx) error {
 	user, ok := models.UsersStore.Data[key]
 	models.UsersStore.Sync.RUnlock()
 
-	log.Println(user, ok)
 	if !ok {
 		return c.Status(fiber.StatusUnauthorized).JSON(models.Response{
 			Data:    nil,
@@ -40,13 +39,13 @@ func AuthMiddleware(c *fiber.Ctx) error {
 
 	method := c.Method()
 	url := c.Path()
-	// Get body in string
 	body := string(c.Body())
 	userSecret := user.Secret
 
 	signStr := method + url + string(body) + userSecret
 
 	expectedSign := utils.MD5Sum(signStr)
+	log.Println("sign", expectedSign, expectedSign == sign)
 
 	if expectedSign != sign {
 		return c.Status(fiber.StatusUnauthorized).JSON(models.Response{

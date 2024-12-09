@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"bookshelf/internal/models"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -13,7 +12,6 @@ func MyselfHandler(c *fiber.Ctx) error {
 	models.UsersStore.Sync.RLock()
 	user, ok := models.UsersStore.Data[userKey]
 	models.UsersStore.Sync.RUnlock()
-	log.Println("user", user, ok)
 
 	if !ok {
 		// This theoretically shouldn't happen because we have auth middleware,

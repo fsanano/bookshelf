@@ -23,9 +23,15 @@ func run(c *cli.Context) error {
 	// Public endpoint
 	app.Post("/signup", handlers.SignupHandler)
 
-	app.Use(middleware.AuthMiddleware)
 	// Authenticated endpoints
+	app.Use(middleware.AuthMiddleware)
 	app.Get("/myself", handlers.MyselfHandler)
+	app.Post("/books", handlers.AddBookHandler)
+	app.Get("/books/:title", handlers.GetBooksByTitleHandler)
+	app.Get("/books", handlers.GetBooksHandler)
+	app.Patch("/books/:id", handlers.UpdateBookHandler)
+	app.Delete("/books/:id", handlers.DeleteBookHandler)
+	app.Get("/cleanup", handlers.CleanupHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
