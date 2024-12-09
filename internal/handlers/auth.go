@@ -7,7 +7,13 @@ import (
 )
 
 func SignupHandler(c *fiber.Ctx) error {
-	var u models.User
+	var u struct {
+		Name   string `json:"name"`
+		Email  string `json:"email"`
+		Key    string `json:"key"`
+		Secret string `json:"secret"`
+	}
+
 	if err := c.BodyParser(&u); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(models.Response{
 			Data:    nil,
@@ -35,10 +41,18 @@ func SignupHandler(c *fiber.Ctx) error {
 		})
 	}
 
-	models.UsersStore.Data[u.Key] = u
+	newUser := models.User{
+		ID:     models.UsersStore.NextID,
+		Name:   u.Name,
+		Email:  u.Email,
+		Key:    u.Key,
+		Secret: u.Secret,
+	}
+	models.UsersStore.NextID++
+	models.UsersStore.Data[newUser.Key] = newUser
 
 	return c.JSON(models.Response{
-		Data:    u,
+		Data:    newUser,
 		IsOk:    true,
 		Message: "ok",
 	})

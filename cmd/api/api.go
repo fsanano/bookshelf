@@ -2,6 +2,7 @@ package api
 
 import (
 	"bookshelf/internal/handlers"
+	"bookshelf/internal/middleware"
 	"log"
 	"os"
 
@@ -21,6 +22,10 @@ func run(c *cli.Context) error {
 
 	// Public endpoint
 	app.Post("/signup", handlers.SignupHandler)
+
+	app.Use(middleware.AuthMiddleware)
+	// Authenticated endpoints
+	app.Get("/myself", handlers.MyselfHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
