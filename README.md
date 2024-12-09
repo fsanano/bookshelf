@@ -1,1 +1,2 @@
-# This is the test project for passing the Interview
+# Bookshelf
+The API for organizing the books
