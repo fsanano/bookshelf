@@ -1,11 +1,11 @@
 package main
 
 import (
+	"bookshelf/cmd/api"
 	"fmt"
 	"os"
 
-	"github.com/fsanano/bookshelf/cmd/api"
-	cli "github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"
 )
 
 func main() {

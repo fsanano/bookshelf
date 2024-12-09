@@ -1,10 +1,12 @@
 package api
 
 import (
-	"runtime/debug"
+	"bookshelf/internal/handlers"
+	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/pprof"
+
 	cli "github.com/urfave/cli/v2"
 )
 
@@ -15,14 +17,17 @@ var Cmd = cli.Command{
 }
 
 func run(c *cli.Context) error {
+	app := fiber.New()
 
-	app := fiber.New(fiber.Config{
-		DisableStartupMessage: true,
-	})
+	// Public endpoint
+	app.Post("/signup", handlers.SignupHandler)
 
-	debug.SetPanicOnFault(true) // will cause panic instead program fault in order to keep application alive
-
-	app.Use(pprof.New())
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3006"
+	}
+	log.Printf("Starting server on port %s", port)
+	log.Fatal(app.Listen(":" + port))
 
 	return nil
 }
