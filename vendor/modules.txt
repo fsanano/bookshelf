@@ -9,7 +9,6 @@ github.com/cpuguy83/go-md2man/v2/md2man
 github.com/gofiber/fiber/v2
 github.com/gofiber/fiber/v2/internal/schema
 github.com/gofiber/fiber/v2/log
-github.com/gofiber/fiber/v2/middleware/pprof
 github.com/gofiber/fiber/v2/utils
 # github.com/google/uuid v1.5.0
 ## explicit
@@ -34,9 +33,6 @@ github.com/rivo/uniseg
 # github.com/russross/blackfriday/v2 v2.1.0
 ## explicit
 github.com/russross/blackfriday/v2
-# github.com/urfave/cli v1.22.16
-## explicit; go 1.11
-github.com/urfave/cli
 # github.com/urfave/cli/v2 v2.27.5
 ## explicit; go 1.18
 github.com/urfave/cli/v2
@@ -46,7 +42,6 @@ github.com/valyala/bytebufferpool
 # github.com/valyala/fasthttp v1.51.0
 ## explicit; go 1.20
 github.com/valyala/fasthttp
-github.com/valyala/fasthttp/fasthttpadaptor
 github.com/valyala/fasthttp/fasthttputil
 github.com/valyala/fasthttp/reuseport
 github.com/valyala/fasthttp/stackless

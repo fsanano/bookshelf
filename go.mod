@@ -4,7 +4,6 @@ go 1.23.2
 
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
-	github.com/urfave/cli v1.22.16
 	github.com/urfave/cli/v2 v2.27.5
 )
 
