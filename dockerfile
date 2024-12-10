@@ -9,11 +9,11 @@ RUN apk add --no-cache git
 # Copy go mod and sum files
 COPY go.mod go.sum ./
 
-# Download dependencies and create vendor directory
-RUN go mod tidy && go mod vendor
-
-# Copy source code
+# Скопировать исходный код прежде чем вызывать go mod tidy и go mod vendor
 COPY . .
+
+# Теперь, когда код уже в контейнере, можно подтянуть зависимости
+RUN go mod tidy && go mod vendor
 
 # Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -o main cmd/main.go
