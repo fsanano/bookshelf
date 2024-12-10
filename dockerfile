@@ -3,11 +3,14 @@ FROM golang:1.23.2-alpine AS builder
 
 WORKDIR /app
 
+# Install necessary tools
+RUN apk add --no-cache git
+
 # Copy go mod and sum files
 COPY go.mod go.sum ./
 
-# Download dependencies and create vendor
-RUN go mod tidy && go mod vendor
+# Download dependencies and create vendor directory
+RUN go mod download && go mod vendor
 
 # Copy source code
 COPY . .
